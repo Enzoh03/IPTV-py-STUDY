@@ -3,7 +3,6 @@ from imports import *
 links_m3u = []
 store=JsonStore("login.json")
 
-
 #-------Login-------#
 class Login(Screen):
     def erro(self, msg):
@@ -74,16 +73,15 @@ class Home(Screen):
    def on_enter(self):
     if store.exists("user") and links_m3u ==[]:
         data=store.get('user')
-        headers={"User-Agent": "Mozilla/5.0"}
         params = {'username':data['username'],'password':data['password'],'type':'m3u_plus','output':'ts'}
         url=f"{data['url']}/get.php"
-        self.link=requests.get(url,headers=headers,params=params)
+        self.link=requests.get(url,headers={"User-Agent": "Mozilla/5.0"},params=params)
         print(self.link)
     
     elif store.exists("m3u_link") and links_m3u ==[]:
         data=store.get('m3u_link')
         url = data['url']   
-        self.link=requests.get(url,headers=headers)
+        self.link=requests.get(url,headers={"User-Agent": "Mozilla/5.0"})
     Clock.schedule_once(self.reqst)
     
    def reqst(self,dt):
