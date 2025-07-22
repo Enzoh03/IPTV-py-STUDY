@@ -2,6 +2,9 @@ import sys
 import os
 from cx_Freeze import setup, Executable
 from kivy_deps import sdl2, glew
+import ffpyplayer
+ffpyplayer_path = os.path.dirname(ffpyplayer.__file__)
+ffpyplayer_tools = os.path.join(ffpyplayer_path, 'tools')
 
 # Incluindo arquivos e pastas extras
 include_files = [
