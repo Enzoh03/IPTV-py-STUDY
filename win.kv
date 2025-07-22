@@ -1,0 +1,951 @@
+<Login>:
+    name: 'login'
+    MDScreen:
+        md_bg_color:'001F54'
+
+        MDCard:
+            orientation: 'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.5}
+            size_hint:None,None
+            padding:'10dp'
+            spacing:'10dp'
+            height:'500dp'
+            width:'400dp'
+            elevation:3
+            radius:[0]
+            shadow_color:"black"
+            md_bg_color: '001F54'
+            
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint:None,None
+                height:'420dp'
+                width:'380dp'
+                radius:[0,60,0,60]
+                md_bg_color: '0A1128'
+                padding:'20dp'
+                spacing:'20dp'
+                
+                MDTextField:
+                    id: url
+                    mode: "rectangle"
+                    
+                    hint_text: "URL"
+                    helper_text: "(ex: http://8p99wkv4df.me)"
+                    helper_text_mode: "on_focus"
+                    text: "http://"
+                    helper_text_color_focus:"white"
+                    
+                    line_color_normal:"white"
+                    text_color_normal:"white"
+                    hint_text_color_normal:"white"
+                    
+                    line_color_focus:'00c6ff'
+                    hint_text_color_focus:"white"
+                
+                MDTextField:
+                    id: user
+                    mode: "rectangle"
+                    hint_text: "User"
+
+                    line_color_normal:"white"
+                    text_color_normal:"white"
+                    hint_text_color_normal:"white"
+
+                    line_color_focus:'00c6ff'
+                    hint_text_color_focus:"white"
+
+                MDTextField:
+                    id: password
+                    mode: "rectangle"
+                    hint_text: "Password"
+
+                    line_color_normal:"white"
+                    text_color_normal:"white"
+                    hint_text_color_normal:"white"
+
+                    line_color_focus:'00c6ff'
+                    hint_text_color_focus:"white"                
+                
+                FitImage:
+                    source:"logos/logo.png"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint:None,None
+                    height:'100dp'
+                    width:'100dp'
+                Widget: 
+           
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: None, None
+                width: '360dp'
+                height: '50dp'
+                pos_hint: {'center_x': 0.5}
+                spacing: '10dp'
+        
+                MDRaisedButton:
+                    text: "Access"
+                    font_size: '16dp'
+                    size_hint_x: 0.5
+                    md_bg_color: '034078'
+                    shadow_color:"black"
+                    on_release: root.user_submit()
+                Widget:
+                MDRaisedButton:
+                    text: "Link M3U"
+                    font_size: '16dp'
+                    size_hint_x: 0.5
+                    md_bg_color: '034078'
+                    shadow_color:"black"
+                    on_press: root.m3u_submit()
+
+
+
+<Home>:
+    name: 'home'
+    MDScreen:
+        md_bg_color:'232e44'
+        MDNavigationLayout:
+            ScreenManager:
+            MDTopAppBar:
+                elevation: 3
+                pos_hint: {"top": 1}
+                md_bg_color:'0A1128'
+                left_action_items: [["account-cog",lambda x:root.nav_open()]]            
+            
+            MDNavigationDrawer:
+                id: nav_drawer
+                pos_hint: {"buttom":1}
+                size_hint: None, None
+                height:'230dp'
+                width:'220dp'
+                elevation:2
+                spacing:'10dp'
+                md_bg_color:'001F54'
+                shadow_color:'black'
+                
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: "10dp"
+                    spacing: "5dp"
+
+                    MDCard:
+                        md_bg_color: '0A1128'
+                        radius: [20]
+                        size_hint: None, None
+                        height: '30dp'
+                        width: '170dp'
+                        pos_hint: {"center_x": 0.5}
+                        padding: '10dp'
+                        MDLabel:
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            text: "IPTV Configuration"
+                            halign: "center"
+                            valign: "center"                    
+                    MDCard:
+                        md_bg_color: '0A1128'
+                        radius: [20]
+                        size_hint_y: None
+                        height: '30dp'
+                        pos_hint: {"center_x": 0.5}
+                        padding: '10dp'
+                        MDLabel:
+                            id: lh_lb1
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            text: "Username: Default"
+                            padding:'5dp'
+                            halign: "left"
+                            valign: "center"
+                    MDCard:
+                        md_bg_color: '0A1128'
+                        radius: [20]
+                        size_hint_y: None
+                        height: '30dp'
+                        pos_hint: {"center_x": 0.5}
+                        padding: '10dp'
+                        MDLabel:
+                            id: lh_lb2
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            text: "Password: Default"
+                            padding:'5dp'
+                            halign: "left"
+                            valign: "center"
+                    MDCard:
+                        orientation:"vertical"
+                        md_bg_color: '0A1128'
+                        radius: [20]
+                        size_hint_y: None
+                        height: '50dp'
+                        pos_hint: {"center_x": 0.5}
+                        padding: '10dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id: lh_lb3
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            text: "URL: Default"
+                            halign: "left"
+                            valign: "center"
+                            font_size:'15dp'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                    Widget:
+                    MDRaisedButton:
+                        text: "LogOut"
+                        pos_hint: {"center_x": 0.5}
+                        font_size: '16dp'
+                        size_hint_x: 0.4
+                        md_bg_color: "red"
+                        shadow_color:"black"
+                        on_press: root.logout()         
+
+        MDCard:
+            orientation: 'vertical'
+            pos_hint:{"center_x":0.5,"center_y":0.5}
+            size_hint:None,None
+            padding:'20dp'
+            height:'350dp'
+            width:'550dp'
+            elevation:2
+            radius:[30,0,0,30]
+            shadow_color:'black'
+            md_bg_color: '0A1128'
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint:None,None
+                height:'310dp'
+                width:'510dp'
+                radius:[30,0,0,30]
+                md_bg_color: '001F54'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:
+                    elevation:1
+                    unfocus_color:'0A1128'
+                    focus_color:'060a18'
+                    md_bg_color:'0A1128'
+                    shadow_color:"black"
+                    focus_behavior:True
+                    ripple_behavior: True
+                    on_press:root.manager.current ='pg1'
+                    FitImage:
+                        source:"logos/tv_logo.png"
+                        pos_hint:{"center_y":0.5}
+                        size_hint:None,None
+                        height:'140dp'
+                        width:'140dp'
+                MDCard:
+                    elevation:1
+                    unfocus_color:'0A1128'
+                    focus_color:'060a18'
+                    md_bg_color:'0A1128'
+                    shadow_color:"black"
+                    padding:'5dp'
+                    focus_behavior:True
+                    ripple_behavior: True
+                    on_press:root.manager.current = 'pg3'
+                    FitImage:
+                        source:"logos/series_logo.png"
+                        pos_hint:{"center_y":0.5}
+                        size_hint:None,None
+                        height:'140dp'
+                        width:'140dp'
+                MDCard:
+                    elevation:1
+                    unfocus_color:'0A1128'
+                    focus_color: '060a18'
+                    md_bg_color:'0A1128'
+                    shadow_color:"black"
+                    padding:'10dp'
+                    focus_behavior:True
+                    ripple_behavior: True
+                    on_press:root.manager.current = 'pg2'
+                    FitImage:
+                        source:"logos/cine_logo.png"
+                        pos_hint:{"center_y":0.5}
+                        size_hint:None,None
+                        height:'120dp'
+                        width:'120dp'
+
+
+
+<Page1>:
+    name:'pg1'
+    MDScreen
+        md_bg_color:'232e44'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding:'20dp'
+            spacing:'20dp'
+
+#-------------Channel display-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'20dp'
+                    spacing:'15dp'
+                    MDBoxLayout:
+                        id: ch_vd_display
+                        md_bg_color:"black"
+                        radius:[30]
+                        pos_hint: {'center_x':0.5,'top':1}
+                        size_hint:1,1
+                    
+                    MDCard:
+                        pos_hint: {'center_x': 0.5}
+                        size_hint: 1, None
+                        radius: [30]
+                        elevation: 2
+                        md_bg_color: '001F54'
+                        shadow_color: '080d20'
+                        padding: '10dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id:Ch_name_lb
+                            halign: "center"
+                            text: "Channel Name"
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            font_size: '25dp'
+                            size_hint_y: None
+                            height: self.texture_size[1]               
+                    
+                    MDCard:                    
+                        pos_hint: {'center_x':0.5}
+                        size_hint:0.7,None
+                        radius:[30]
+                        elevation:2
+                        height:'74dp'
+                        md_bg_color:'001F54'
+                        shadow_color:'080d20'
+                        padding:'15dp'
+                        MDRaisedButton:
+                            id:play_btt
+                            text:"Play Now"
+                            font_size:'20dp'
+                            pos_hint: {'center_x':0.5}
+                            size_hint:1,1
+                            on_press:root.play_media()
+                    
+                    MDCard:
+                        pos_hint: {'center_x':0.5}
+                        size_hint:1,1
+                        radius:[0,30,0,30]
+                        elevation:2
+                        height:'74dp'
+                        md_bg_color:'001F54'
+                        shadow_color:'080d20'
+                        padding:'10dp'
+                        MDBoxLayout:
+                            radius:[0,30,0,30]
+                            md_bg_color:'034078'
+                            ScrollView:
+                                bar_width:0
+                                MDList:
+                                    padding:'15dp'
+                                    id: category_list
+                                
+
+#-------------Channel List-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2 
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    adaptive_height: True 
+                    padding:'10dp'                    
+                    MDBoxLayout:
+                        pos_hint: {'center_x': 0.5}
+                        size_hint: 1, None
+                        radius: [30]
+                        md_bg_color: '001F54'
+                        padding: '10dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id:Channel_cat_lb
+                            halign: "center"
+                            text: "Channel Category"
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            font_size: '25dp'
+                            size_hint_y: None
+                            height: self.texture_size[1] 
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'15dp'
+                    spacing:'10dp'
+                    MDCard:
+                        pos_hint: {'center_x':0.5,'top':1}
+                        size_hint:1,0.77
+                        elevation:2
+                        radius:[0,30,0,30]
+                        md_bg_color:'001F54'
+                        shadow_color:'0A1128'
+                        padding:'20dp'
+                        MDBoxLayout:
+                            radius:[0,30,0,30]
+                            md_bg_color:'034078'                      
+                            ScrollView:
+                                bar_width:0
+                                MDGridLayout:
+                                    id: channel_list
+                                    padding:'30dp'
+                                    cols: 4
+                                    spacing: "15dp"
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                MDIconButton:
+                    icon: "arrow-left"
+                    theme_text_color: "Custom"
+                    text_color: "white"
+                    pos_hint: {"center_y":0.15,"center_x":0.5}
+                    icon_size: "64dp"
+                    md_bg_color:'001F54'
+                    on_press:root.back_home()
+                
+
+<Tv_player>:
+    name: 'tv'
+    MDScreen:
+        md_bg_color: "black"
+        FloatLayout:
+            Video:
+                id: video
+                source: ''
+                state: 'stop'
+                size_hint: 1, 1
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: "white"
+                pos_hint: {"x": 0.02, "y":0.9}
+                on_press: root.back_stop()
+
+
+
+
+<Page2>:
+    name:'pg2'
+    MDScreen
+        md_bg_color:'232e44'
+        MDBoxLayout:
+            orientation:'horizontal'
+            padding:'20dp'
+            spacing:'20dp'
+
+
+#-------------Movie category-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2 
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    adaptive_height: True 
+                    padding:'10dp'                    
+                    MDBoxLayout:
+                        pos_hint: {'center_x': 0.5}
+                        size_hint: 1, None
+                        radius: [30]
+                        md_bg_color: '001F54'
+                        padding: '10dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id:category_lb
+                            halign: "center"
+                            text: "Movie Category"
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            font_size: '25dp'
+                            size_hint_y: None
+                            height: self.texture_size[1] 
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'15dp'
+                    spacing:'10dp'
+                    MDCard:
+                        pos_hint: {'center_x':0.5,'top':1}
+                        size_hint:1,0.77
+                        elevation:2
+                        radius:[0,30,0,30]
+                        md_bg_color:'001F54'
+                        shadow_color:'0A1128'
+                        padding:'15dp'                        
+                        MDBoxLayout:
+                            radius:[0,30,0,30]
+                            md_bg_color:'034078'
+                            ScrollView:
+                                bar_width:0
+                                MDList:
+                                    padding:'15dp'
+                                    id: category_list
+                    MDIconButton:
+                        icon: "arrow-left"
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        pos_hint: {"center_y":0.15,"center_x":0.5}
+                        icon_size: "64dp"
+                        md_bg_color:'001F54'
+                        on_press:root.manager.current ='home'
+                      
+#-------------Movie display-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[30]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'20dp'
+                    spacing:'20dp'
+                    MDBoxLayout:
+                        md_bg_color:"black"
+                        radius:[30]
+                        pos_hint: {'center_x':0.5,'top':1}
+                        size_hint:1,0.8
+                        AsyncImage:
+                            id: movie_logo
+                            allow_stretch: True
+                            keep_ratio: True
+                            source:'logos/cine_logo.png'
+                    
+                    MDCard:
+                        pos_hint: {'center_x': 0.5}
+                        size_hint: 1, None
+                        radius: [30]
+                        elevation: 2
+                        md_bg_color: '001F54'
+                        shadow_color: '080d20'
+                        padding: '20dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id:movie_name
+                            halign: "center"
+                            text: "Movie Title"
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            font_size: '25dp'
+                            size_hint_y: None
+                            height: self.texture_size[1]               
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'20dp'
+                    MDRaisedButton:
+                        id:play_btt
+                        text:"Play Now"
+                        font_size:'20dp'
+                        pos_hint: {'center_x':0.5}
+                        size_hint:1,1
+                        on_press:root.play_media()
+                MDCard:   
+                    orientation:'horizontal'                 
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'10dp'
+                    spacing:'10dp'
+                    MDTextField:
+                        id:entry_mv
+                        pos_hint: {'center_x':0.5}
+                        size_hint:1,None
+                        radius:[30]
+                        mode: "rectangle"
+                        hint_text: "Search"
+
+                        line_color_normal:"white"
+                        text_color_normal:"white"
+                        hint_text_color_normal:"white"
+                        
+                        line_color_focus:'00c6ff'
+                        hint_text_color_focus:"white"
+                        text_color_focus:"white"
+                    MDIconButton:
+                        icon: "magnify"
+                        md_bg_color:'001F54'
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        pos_hint:{'center_x':0.5}
+                        on_press:root.search_mv()
+
+#-------------Movies list-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    radius:[0,30,0,30]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'             
+                    ScrollView:
+                        bar_width:0
+                        MDGridLayout:
+                            padding:'10dp' 
+                            id: movies_list
+                            cols: 3
+                            spacing: "15dp"
+                            size_hint_y: None
+                            height: self.minimum_height
+                MDBoxLayout:
+                    size_hint:1,0.05
+                    orientation:'horizontal'
+                    spacing:'10dp'                   
+                    Widget:
+                    MDRaisedButton:
+                        text:"back"
+                        on_release: root.change_page(-1)
+                    MDRaisedButton:
+                        on_release: root.change_page(1)
+                        text:"next"
+                    Widget:
+
+
+
+
+
+<Page3>:
+    name:'pg3'
+    MDScreen
+        md_bg_color:'232e44'
+        MDBoxLayout:
+            orientation:'horizontal'
+            padding:'20dp'
+            spacing:'20dp'
+
+
+#-------------series category-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    adaptive_height: True 
+                    padding:'10dp'                    
+                    MDBoxLayout:
+                        pos_hint: {'center_x': 0.5}
+                        size_hint: 1, None
+                        radius: [30]
+                        md_bg_color: '001F54'
+                        padding: '10dp'
+                        adaptive_height: True 
+                        MDLabel:
+                            id:category_lb
+                            halign: "center"
+                            text: "Series Category"
+                            theme_text_color: "Custom"
+                            text_color: "white"
+                            font_size: '25dp'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'15dp'
+                    spacing:'10dp'
+                    MDCard:
+                        pos_hint: {'center_x':0.5,'top':1}
+                        size_hint:1,0.77
+                        elevation:2
+                        radius:[0,30,0,30]
+                        md_bg_color:'001F54'
+                        shadow_color:'0A1128'
+                        padding:'15dp'                        
+                        MDBoxLayout:
+                            radius:[0,30,0,30]
+                            md_bg_color:'034078'
+                            ScrollView:
+                                bar_width:0
+                                MDList:
+                                    padding:'15dp'
+                                    id: series_category
+                    MDIconButton:
+                        icon: "arrow-left"
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        pos_hint: {"center_y":0.15,"center_x":0.5}
+                        icon_size: "64dp"
+                        md_bg_color:'001F54'
+                        on_press:root.manager.current ='home'
+
+#-------------series display-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:
+                    pos_hint: {'center_x': 0.5}
+                    size_hint: 1, None
+                    radius: [30]
+                    elevation: 2
+                    md_bg_color: '0A1128'
+                    shadow_color: '080d20'
+                    padding: '20dp'
+                    adaptive_height: True 
+                    MDLabel:
+                        id: sr_name_lb
+                        halign: "center"
+                        text: "Series Title"
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        font_size: '25dp'
+                        size_hint_y: None
+                        height: self.texture_size[1]        
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'15dp'
+                    spacing:'10dp'
+                    MDBoxLayout:
+                        orientation:'horizontal'
+                        MDBoxLayout:
+                            md_bg_color:"black"
+                            AsyncImage:
+                                id: sr_logo
+                                allow_stretch: True
+                                keep_ratio: True
+                                source:'logos/series_logo.png'
+                        MDBoxLayout:
+                            orientation:'vertical'
+                            padding:'5dp'
+                            MDBoxLayout:
+                                md_bg_color:'001F54'
+                                size_hint:1,1
+                                radius:[30]
+                                padding:'10dp'
+                                adaptive_height: True
+                                MDLabel:
+                                    id:episode_lb
+                                    text:"Episode"
+                                    halign:"left"
+                                    theme_text_color:"Custom"
+                                    text_color:"white"
+                                    font_size:'20dp'
+                                    size_hint_y: None
+                                    height: self.texture_size[1]
+                            MDBoxLayout:
+                                padding:'5dp'
+                                id: card_bt
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,0.2
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'5dp'
+                    ScrollView:
+                        do_scroll_x: True
+                        do_scroll_y: False
+                        bar_width:0
+                        MDBoxLayout:
+                            orientation:'horizontal' 
+                            size_hint_x: None
+                            height: self.minimum_height
+                            width: self.minimum_width
+                            spacing:'10dp'
+                            padding:'5dp'
+                            id: season_list
+                MDCard:
+                    orientation:'vertical'                    
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,1
+                    radius:[0]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'15dp'
+                    spacing:'10dp'
+                    MDBoxLayout:
+                        md_bg_color:'001F54'
+                        size_hint:0.5,0.16
+                        radius:[30]
+                        padding:'10dp'
+                        adaptive_height: True
+                        MDLabel:
+                            id:season_lb
+                            text:"Season"
+                            halign:"left"
+                            theme_text_color:"Custom"
+                            text_color:"white"
+                            font_size:'20dp'
+                            size_hint_y: None
+                            height: self.texture_size[1] 
+                    MDBoxLayout:
+                        radius:[0,30,0,30]
+                        md_bg_color:'001F54'
+                        ScrollView:
+                            bar_width:0
+                            MDList:
+                                padding:'15dp'
+                                id: episode_list
+
+#-------------series list-----------------#
+            MDBoxLayout:
+                md_bg_color: '034078'
+                orientation: 'vertical'
+                padding:'20dp'
+                spacing:'20dp'
+                MDCard:   
+                    orientation:'horizontal'                 
+                    pos_hint: {'center_x':0.5}
+                    size_hint:1,None
+                    radius:[30]
+                    elevation:2
+                    height:'74dp'
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'
+                    padding:'10dp'
+                    spacing:'10dp'
+                    MDTextField:
+                        id:entry_sr
+                        pos_hint: {'center_x':0.5}
+                        size_hint:1,None
+                        radius:[30]
+                        mode: "rectangle"
+                        hint_text: "Search"
+
+                        line_color_normal:"white"
+                        text_color_normal:"white"
+                        hint_text_color_normal:"white"
+                        
+                        line_color_focus:'00c6ff'
+                        hint_text_color_focus:"white"
+                        text_color_focus:"white"
+                    MDIconButton:
+                        icon: "magnify"
+                        md_bg_color:'001F54'
+                        theme_text_color: "Custom"
+                        text_color: "white"
+                        pos_hint:{'center_x':0.5}
+                        on_press:root.search_sr()
+                MDCard:                    
+                    pos_hint: {'center_x':0.5}
+                    radius:[0,30,0,30]
+                    elevation:2
+                    md_bg_color:'0A1128'
+                    shadow_color:'080d20'             
+                    ScrollView:
+                        bar_width:0
+                        MDGridLayout:
+                            padding:'10dp' 
+                            id: series_list
+                            cols: 3
+                            spacing: "15dp"
+                            size_hint_y: None
+                            height: self.minimum_height
+                MDBoxLayout:
+                    size_hint:1,0.05
+                    orientation:'horizontal'
+                    spacing:'10dp'                   
+                    Widget:
+                    MDRaisedButton:
+                        text:"back"
+                        on_release: root.change_page(-1)
+                    MDRaisedButton:
+                        on_release: root.change_page(1)
+                        text:"next"
+                    Widget:
+
+
+
+<Player>:
+    name: 'plyr'
+    MDScreen:
+        md_bg_color: "black"
+        FloatLayout:
+            VideoPlayer:
+                id: video
+                source: ''
+                state: 'stop'
+                size_hint: 1, 1
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: "white"
+                pos_hint: {"x": 0.02, "y": 0.88}
+                on_press: root.back_stop()
+            
